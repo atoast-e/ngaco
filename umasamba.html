@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>fuck you</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        height: 100vh;
+        overflow: hidden;
+        background: #11121a;
+        color: white;
+        font-family: Arial, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .container {
+        text-align: center;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: clamp(28px, 5vw, 48px);
+        margin-bottom: 15px;
+    }
+
+    p {
+        color: #999aaa;
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
+
+    .counter {
+        color: #777bff;
+        font-size: 14px;
+        margin-top: 25px;
+    }
+
+    #runaway {
+        position: fixed;
+        left: 50%;
+        top: 60%;
+        transform: translate(-50%, -50%);
+        padding: 16px 32px;
+        border: none;
+        border-radius: 10px;
+        background: #777bff;
+        color: white;
+        font-size: 17px;
+        font-weight: bold;
+        cursor: pointer;
+        white-space: nowrap;
+        box-shadow: 0 5px 25px #777bff44;
+        transition:
+            left 0.25s ease,
+            top 0.25s ease,
+            background 0.2s ease;
+        z-index: 10;
+    }
+
+    #runaway:hover {
+        background: #9295ff;
+    }
+
+    .hint {
+        position: fixed;
+        bottom: 30px;
+        color: #555765;
+        font-size: 12px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>mambo</h1>
+    <p>samba, uma uma samba, maenichi samba, samba samba, uma uma samba.</p>
+
+    <div class="counter">
+        berapa sawit sudah ditebang: <span id="count">0</span>
+    </div>
+</div>
+
+<button id="runaway">pencet sini bambang</button>
+
+<div class="hint">fuck you</div>
+
+<script>
+    const button = document.getElementById("runaway");
+    const counter = document.getElementById("count");
+
+    let attempts = 0;
+
+    const messages = [
+        "hi",
+        "ehe",
+        "anu",
+        "ehmm",
+        ">///<",
+        "jangan marah ya",
+        "p-pencet terus...",
+        "help",
+        "i'm going insane",
+    ];
+
+    function moveButton() {
+        attempts++;
+        counter.textContent = attempts;
+
+        // Change button text
+        const randomMessage =
+            messages[Math.floor(Math.random() * messages.length)];
+
+        button.textContent = randomMessage;
+
+        // Get screen boundaries
+        const maxX = window.innerWidth - button.offsetWidth - 15;
+        const maxY = window.innerHeight - button.offsetHeight - 15;
+
+        // Random position
+        const x = Math.random() * (maxX - 15) + 15;
+        const y = Math.random() * (maxY - 15) + 15;
+
+        // Move!
+        button.style.left = x + "px";
+        button.style.top = y + "px";
+        button.style.transform = "none";
+
+        // Random button color
+        const colors = [
+            "#777bff",
+            "#ff6584",
+            "#ff9f43",
+            "#00b894",
+            "#a66cff"
+        ];
+
+        button.style.background =
+            colors[Math.floor(Math.random() * colors.length)];
+    }
+
+    button.addEventListener("click", moveButton);
+
+    // Keep button inside screen after resizing
+    window.addEventListener("resize", () => {
+        const maxX = window.innerWidth - button.offsetWidth;
+        const maxY = window.innerHeight - button.offsetHeight;
+
+        button.style.left =
+            Math.max(0, Math.min(parseFloat(button.style.left) || window.innerWidth / 2, maxX)) + "px";
+
+        button.style.top =
+            Math.max(0, Math.min(parseFloat(button.style.top) || window.innerHeight / 2, maxY)) + "px";
+    });
+</script>
+
+</body>
+</html>
